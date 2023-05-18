@@ -4,23 +4,23 @@ import java.awt.*;
 
 public abstract class GameObject {
 
-    //游戏元素图片
+    //game image 
     Image img;
-    //游戏元素的横坐标
+    //image x 
     int x;
-    //游戏元素的纵坐标
+    //image y
     int y;
-    //游戏元素的宽
+    //image width
     int width;
-    //游戏元素的高
+    //image height 
     int height;
-    //游戏元素的移动速度
+    //image speed
     int speed;
-    //游戏元素的移动方向
+    //image direction
     Direction direction;
-    //坦克分类
+    //tank type
     TankType tankType;
-    //引入主界面
+    //game main panel
     GamePanel gamePanel;
 
     public GameObject(){ }
@@ -30,7 +30,7 @@ public abstract class GameObject {
         this.y = y;
         this.gamePanel = gamePanel;
     }
-    //墙， 基地
+    //wall, base
     public GameObject(String img, int x, int y, int width, int height, GamePanel gamePanel){
         this.img = Toolkit.getDefaultToolkit().getImage(img);;
         this.x = x;
@@ -39,7 +39,7 @@ public abstract class GameObject {
         this.height = height;
         this.gamePanel = gamePanel;
     }
-    //双方坦克和子弹
+    //both tank and ammo
     public GameObject(String img, int x, int y, int width, int height, int speed, Direction direction,
                       TankType tankType, GamePanel gamePanel) {
         this.img = Toolkit.getDefaultToolkit().getImage(img);
@@ -109,9 +109,9 @@ public abstract class GameObject {
         this.gamePanel = gamePanel;
     }
 
-    //继承元素绘制自己的方法
+    //paint element it self
     public abstract void paintSelf(Graphics g);
 
-    //获取当前游戏元素的矩形,是为碰撞检测而写
+    //Gets the rectangle of the current game element, written for collision detection
     public abstract Rectangle getRec();
 }
