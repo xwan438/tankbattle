@@ -161,9 +161,9 @@ public class GamePanel extends JFrame {
             //改变文字大小和样式
             gImage.setFont(new Font("仿宋",Font.BOLD,50));
             //添加文字
-            gImage.drawString("选择游戏模式",220,100);
-            gImage.drawString("单人游戏",220,200);
-            gImage.drawString("双人游戏",220,300);
+            gImage.drawString("gmae mode",220,100);
+            gImage.drawString("single",220,200);
+            gImage.drawString("double",220,300);
             gImage.drawImage(select,160,y,null);
         }
         else if(state == 1||state == 2){
@@ -173,13 +173,13 @@ public class GamePanel extends JFrame {
             //改变文字大小和样式
             gImage.setFont(new Font("仿宋",Font.BOLD,50));
             //添加文字
-            gImage.drawString("游戏开始",220,300);
+            gImage.drawString("game start",220,300);
 
             if(state == 1){
-                gImage.drawString("单人模式",220,200);
+                gImage.drawString("single",220,200);
             }
             else{
-                gImage.drawString("双人模式",220,200);
+                gImage.drawString("double",220,200);
             }
 
             //paint重绘游戏元素
@@ -211,7 +211,7 @@ public class GamePanel extends JFrame {
             gImage.setColor(Color.yellow);
             //改变文字大小和样式
             gImage.setFont(new Font("仿宋",Font.BOLD,50));
-            gImage.drawString("游戏暂停",220,200);
+            gImage.drawString("game pause",220,200);
         }
         else if(state == 4){
             gImage.drawImage(background,0,0,null);
@@ -219,7 +219,7 @@ public class GamePanel extends JFrame {
             gImage.setColor(Color.RED);
             //改变文字大小和样式
             gImage.setFont(new Font("仿宋",Font.BOLD,50));
-            gImage.drawString("游戏失败",220,200);
+            gImage.drawString("fail",220,200);
         }
         else if(state == 5){
             gImage.drawImage(background,0,0,null);
@@ -227,7 +227,7 @@ public class GamePanel extends JFrame {
             gImage.setColor(Color.yellow);
             //改变文字大小和样式
             gImage.setFont(new Font("仿宋",Font.BOLD,50));
-            gImage.drawString("游戏胜利",220,200);
+            gImage.drawString("victory",220,200);
         }
         /** 将缓冲区绘制好的图形整个绘制到容器的画布中 */
         g.drawImage(offScreenImage, 0, 0, null);
