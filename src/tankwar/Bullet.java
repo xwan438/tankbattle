@@ -9,7 +9,7 @@ public class Bullet extends GameObject{
     }
 
     public void go(){
-        /**判断移动方向*/
+        /**Determine the direction of movement*/
         switch (direction){
             case UP:
                 upward();
@@ -24,12 +24,12 @@ public class Bullet extends GameObject{
                 rightward();
                 break;
         }
-        //碰撞检测
+        //collision detection
         hitTank();
         hitWall();
         hitBase();
     }
-    //子弹移动
+    //Bullet movement
     public void leftward(){
         x -= speed;
         moveToBorder();
@@ -47,12 +47,12 @@ public class Bullet extends GameObject{
         moveToBorder();
     }
 
-    /**子弹与坦克碰撞检测*/
+    /**Bullet Tank Collision Detection*/
     public void hitTank(){
         Rectangle next= this.getRec();
         List<Tank> tanks = this.gamePanel.tankList;
         List<Bot> bots = this.gamePanel.botList;
-        //子弹和Tank
+        //Bullets and Tank
         for(Tank tank: tanks){
             if(tank.getRec().intersects(next)){
                 if(tankType.equals(TankType.BOT)){
@@ -65,7 +65,7 @@ public class Bullet extends GameObject{
                 }
             }
         }
-        //子弹和bot
+        //Bullets andbot
         for(Bot bot: bots){
             if(bot.getRec().intersects(next)){
                 if(!tankType.equals(TankType.BOT)){
