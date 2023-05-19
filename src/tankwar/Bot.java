@@ -33,7 +33,7 @@ public class Bot extends Tank{
         }
     }
 
-    //电脑坦克随机方向
+    //bot Tank Random Direction
     public Direction randomDirection() {
         Random r = new Random();
         int rnum = r.nextInt(4);
@@ -49,7 +49,7 @@ public class Bot extends Tank{
         }
     }
 
-    //只有4%几率攻击
+    //Only 4% chance to attack
     public void attack() {
         Point p = getHeadPoint();
         Random r = new Random();
