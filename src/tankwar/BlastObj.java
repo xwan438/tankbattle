@@ -25,7 +25,7 @@ public class BlastObj extends GameObject {
 
     @Override
     public void paintSelf(Graphics g) {
-        //绘制点击爆炸效果
+        //Draw click explosion effect
         if (explodeCount < 8){
             g.drawImage(imgs[explodeCount],x,y,null);
             explodeCount++;
