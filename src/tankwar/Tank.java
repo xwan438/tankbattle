@@ -7,24 +7,24 @@ import java.util.List;
 
 public class Tank extends GameObject{
 
-    private boolean attackCoolDown =true;//攻击冷却状态
-    private int attackCoolDownTime =1000;//攻击冷却时间毫秒间隔1000ms发射子弹
-    private String upImage; //向上移动时的图片
-    private String downImage;//向下移动时的图片
-    private String rightImage;//向右移动时的图片
-    private String leftImage;//向左移动时的图片
+    private boolean attackCoolDown =true;//Attack cooling state
+    private int attackCoolDownTime =1000;//Attack cooldown time milliseconds interval 1000ms Launch bullets
+    private String upImage; //Picture when moving up
+    private String downImage;//Picture when moving down
+    private String rightImage;//Picture when moving right
+    private String leftImage;//Picture when moving left
     boolean alive = true;
-    //坦克size
+    //tank size
     int width = 40;
     int height = 50;
-    //坦克头部坐标
+    //Tank head coordinates
     Point p;
 
-    //坦克坐标，方向，图片，类型（好，坏），面板（哪个关卡）
+    //Tank coordinates, direction, image, type (good, bad), panel (which level)
     public Tank(String img, int x, int y, int width, int height, int speed, Direction direction, TankType tankType, GamePanel gamePanel) {
         super(img, x,  y, width, height, speed, direction, tankType, gamePanel);
 
-        //不同类型坦克图片
+        //Pictures of different types of tanks
         switch(tankType){
             case PLAYER1:
                 upImage = "images/player1/p1tankU.gif";
@@ -88,11 +88,11 @@ public class Tank extends GameObject{
     }
 
     public boolean hitWall(int x, int y){
-        //假设玩家坦克前进，下一个位置形成的矩形
+        //Assuming the player's tank advances, the rectangle formed by the next position
         Rectangle next = new Rectangle(x, y, width, height);
-        //地图里所有的墙体
+        //All the walls in the map
         List<Wall> walls = this.gamePanel.wallList;
-        //判断两个矩形是否相交（即是否撞墙）
+        //Determine whether two rectangles intersect (i.e. whether they collide with a wall)
         for(Wall w:walls){
             if(w.getRec().intersects(next)){
                 return true;
@@ -117,18 +117,18 @@ public class Tank extends GameObject{
 
     public class AttackCD extends Thread{
         public void run(){
-            attackCoolDown=false;//将攻击功能设置为冷却状态
+            attackCoolDown=false;//Set the attack function to a cooling state
             try{
-                Thread.sleep(attackCoolDownTime);//休眠1秒
+                Thread.sleep(attackCoolDownTime);//Sleep for 1 second
             }catch(InterruptedException e){
                 e.printStackTrace();
             }
-            attackCoolDown=true;//将攻击功能解除冷却状态
+            attackCoolDown=true;//Deactivate the cooling state of the attack function
             this.stop();
         }
     }
 
-    //根据方向确定头部位置，x和y是左下角的点
+    //Determine the head position based on the direction, where x and y are the points in the lower left corner
     public Point getHeadPoint(){
         switch (direction){
             case UP:
