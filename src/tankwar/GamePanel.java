@@ -12,24 +12,24 @@ import java.util.List;
 
 public class GamePanel extends JFrame {
 
-    /** 定义双缓存图片 */
+    /** Define dual cache images */
     Image offScreenImage = null;
-    //游戏状态 0 游戏未开始，1 单人模式，2 双人模式， 3 游戏暂停， 4 游戏失败，5 游戏成功
+    //Game State 0 Game not started，1 SINGLE PLAYER，2 two player， 3 Game Pause 4 Game failed，5 Game Success
     int state= 0;
-    //临时变量
+    //Temporary variables
     int a = 1;
-    //重绘次数
+    //Redraw Times
     int count = 0;
-    //窗口长宽
+    //Window length and width
     int width = 800;
     int height = 610;
-    //敌人数量
+    //Number of enemies
     int enemyCount = 0;
-    //高度
+    //height
     int y = 150;
-    //是否开始
+    //Start or not
     boolean start = false;
-    //物体集合
+    //Object Collection
     List<Bullet> bulletList = new ArrayList<>();
     List<Bot> botList = new ArrayList<>();
     List<Tank> tankList = new ArrayList<>();
@@ -37,31 +37,31 @@ public class GamePanel extends JFrame {
     List<Bullet> removeList = new ArrayList<>();
     List<Base> baseList = new ArrayList<>();
     List<BlastObj> blastList = new ArrayList<>();
-    //背景图片
+    //Background image
     Image background = Toolkit.getDefaultToolkit().getImage("images/background.jpg");
-    //指针图片
+    //Pointer image
     Image select = Toolkit.getDefaultToolkit().getImage("images/selecttank.gif");
-    //基地
+    //base
     Base base = new Base("images/star.gif", 365, 560, 50, 50, this);
-    //玩家
+    //game player
     Tank player1 = new Tank("images/player1/p1tankU.gif", 125, 510,40, 30, 15, Direction.UP, TankType.PLAYER1, this);
     Tank player2 = new Tank("images/player2/p1tankU.gif", 675, 510,40, 30, 15, Direction.UP, TankType.PLAYER2, this);
 
-    //窗口的启动方法
+    //Startup method for windows
     public void launch(){
-        //标题
-        setTitle("坦克大战");
-        //窗口初始大小
+        //title
+        setTitle("Tank Battle");
+        //Initial window size
         setSize(width, height);
-        //用户不能调整大小
+        //User cannot adjust size
         setResizable(false);
-        //使窗口可见
+        //Make the window visible
         setVisible(true);
-        //获取屏幕分辨率，使窗口生成时居中
+        //Obtain screen resolution to center the window during generation
         Toolkit tool = Toolkit.getDefaultToolkit();
         Dimension d = tool.getScreenSize();
         setLocation((d.width - getWidth()) / 2, (d.height - getHeight()) / 2);
-        //添加键盘事件
+        //Add Keyboard Event
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -78,7 +78,7 @@ public class GamePanel extends JFrame {
                         break;
                     case KeyEvent.VK_ENTER:
                         state = a;
-                        //添加玩家
+                        //Add Players
                         if(state == 1 && !start){
                             tankList.add(player1);
                         }else{
@@ -103,7 +103,7 @@ public class GamePanel extends JFrame {
                 }
             }
         });
-        //添加围墙
+        //Add fence
         for(int i = 0; i< 14; i ++){
             wallList.add(new Wall("images/walls.gif", 50+i*50 ,170,50, 50, this ));
         }
@@ -112,7 +112,7 @@ public class GamePanel extends JFrame {
         wallList.add(new Wall("images/walls.gif", 365 ,500, 50, 50,this ));
         wallList.add(new Wall("images/walls.gif", 425 ,500, 50, 50,this ));
         wallList.add(new Wall("images/walls.gif", 425 ,560, 50, 50,this ));
-        //添加基地
+        //Add Base
         baseList.add(base);
 
 
@@ -133,7 +133,7 @@ public class GamePanel extends JFrame {
             }
             repaint();
             try {
-                //线程休眠  1秒 = 1000毫秒
+                //Thread sleep for 1 second=1000 milliseconds
                 Thread.sleep(25);
             }catch (Exception e){
                 e.printStackTrace();
@@ -145,22 +145,22 @@ public class GamePanel extends JFrame {
     public void paint(Graphics g) {
         //System.out.println(bulletList.size());
         //System.out.println("tank"+tankList.size());
-        //创建和容器一样大小的Image图片
+        //Create an Image image of the same size as the container
         if(offScreenImage ==null){
             offScreenImage=this.createImage(width, height);
         }
-        //获得该图片的画布
+        //Obtain the canvas for this image
         Graphics gImage= offScreenImage.getGraphics();
-        //填充整个画布
+        //Fill the entire canvas
         gImage.fillRect(0, 0, width, height);
         if(state == 0){
-            //添加背景
+            //Add Background
             gImage.drawImage(background,0,0,null);
-            //挂变画笔颜色
+            //change variable brush color
             gImage.setColor(Color.BLUE);
-            //改变文字大小和样式
+            //Change text size and style
             gImage.setFont(new Font("仿宋",Font.BOLD,50));
-            //添加文字
+            //Add Text
             gImage.drawString("mode",220,100);
             gImage.drawString("single",220,200);
             gImage.drawString("double",220,300);
@@ -168,21 +168,21 @@ public class GamePanel extends JFrame {
         }
         else if(state == 1||state == 2){
             gImage.drawImage(background,0,0,null);
-            //改变画笔的颜色
+            //Change the color of the brush
             gImage.setColor(Color.BLUE);
-            //改变文字大小和样式
+            //Change text size and style
             gImage.setFont(new Font("仿宋",Font.BOLD,50));
-            //添加文字
-            gImage.drawString("游戏开始",220,300);
+            //Add Text
+            gImage.drawString("game start",220,300);
 
             if(state == 1){
-                gImage.drawString("单人模式",220,200);
+                gImage.drawString("single",220,200);
             }
             else{
-                gImage.drawString("双人模式",220,200);
+                gImage.drawString("double",220,200);
             }
 
-            //paint重绘游戏元素
+            //paint Redraw game elements
             for(Tank tank : tankList){
                 tank.paintSelf(gImage);
             }
@@ -202,34 +202,34 @@ public class GamePanel extends JFrame {
             for(BlastObj blast : blastList){
                 blast.paintSelf(gImage);
             }
-            //重绘次数+1
+            //Redraw times+1
             count++;
         }
         else if(state == 3){
             gImage.drawImage(background,0,0,null);
-            //改变画笔的颜色
+            //Change the color of the brush
             gImage.setColor(Color.yellow);
-            //改变文字大小和样式
+            //Change text size and style
             gImage.setFont(new Font("仿宋",Font.BOLD,50));
-            gImage.drawString("游戏暂停",220,200);
+            gImage.drawString("gmae pause",220,200);
         }
         else if(state == 4){
             gImage.drawImage(background,0,0,null);
-            //改变画笔的颜色
+            //Change the color of the brush
             gImage.setColor(Color.RED);
-            //改变文字大小和样式
+            //Change text size and style
             gImage.setFont(new Font("仿宋",Font.BOLD,50));
-            gImage.drawString("游戏失败",220,200);
+            gImage.drawString("game fail",220,200);
         }
         else if(state == 5){
             gImage.drawImage(background,0,0,null);
-            //改变画笔的颜色
+            //Change the color of the brush
             gImage.setColor(Color.yellow);
-            //改变文字大小和样式
+            //Change text size and style
             gImage.setFont(new Font("仿宋",Font.BOLD,50));
-            gImage.drawString("游戏胜利",220,200);
+            gImage.drawString("victory",220,200);
         }
-        /** 将缓冲区绘制好的图形整个绘制到容器的画布中 */
+        /** Draw the entire buffer drawn graph onto the container's canvas */
         g.drawImage(offScreenImage, 0, 0, null);
     }
 
