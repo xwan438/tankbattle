@@ -9,19 +9,19 @@ import stage.body.Bullet;
 public class Enemy extends Tank implements Runnable{
 	
 	int type;
-	// type 1: ��ͨ��̹��
-	// 2: 2��3��ͬһ�����͵�̹�ˣ����̹�ˣ�
-	// 4: ����̹��
+	// type 1: 普通的坦克.
+	// 2: 2和3是同一种类型的坦克（肉盾坦克）
+	// 4: 飞速坦克
 	CopyOnWriteArrayList<Bullet> bulletPool;
-	// һЩ̹��ɱ�����н���
-	// 0: û����
-	// 1�� ���ʱ����ͣ
-	// 2: ��һ����
-	// 3: ����̹��������
-	// 4: ��ñ�����
-	// 5: ���������ǣ�ÿ���ж���ӷ֣��ӵ����١��ӵ�������
-	// 6: ���ػ�ý������
-	// TODO: ʵ�ֵ���
+	// 一些坦克杀死后有奖励
+	// 0: 没奖励
+	// 1： 获得时间暂停
+	// 2: 加一条命
+	// 3: 所有坦克上西天
+	// 4: 获得保护盾
+	// 5: 吃三次星星（每颗有额外加分）子弹加速、子弹穿钢铁
+	// 6: 基地获得建筑变成
+	// TODO: 实现道具
 	int award;
 	
 	
